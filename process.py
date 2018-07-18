@@ -53,9 +53,9 @@ def process(input_file, output_file, output_type_file, spli_char):
     with open(file=output_file, mode='w', encoding='utf-8') as f:
         with open(file=output_type_file, mode='w', encoding='utf-8') as ftype:
             for key, value in output_dict.items():
-                f.write(key + "\t\t" + "\t".join(str(i) for i in list(value)))
+                f.write(key + "\t\t" + "\t".join(str(i) for i in list(value))+"\n")
             for key, value in output_type_dict.items():
-                ftype.write(key + "\t\t" + "\t".join(str(i) for i in list(value)))
+                ftype.write(key + "\t\t" + "\t".join(str(i) for i in list(value))+"\n")
 
 
 if __name__ == '__main__':
