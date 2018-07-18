@@ -9,7 +9,6 @@ from printProcess import show
 import time
 import datetime
 
-
 # 一、定义源文件路径
 base = "./sourceData/"
 path1 = base + "en_att_triples"
@@ -59,13 +58,13 @@ def splitFile(input_file, output_file, entity_prefix, string_mark, split_char):
             if line == '':
                 continue
 
-            info = line.split(sep=split_char,maxsplit=2)
+            info = line.split(sep=split_char, maxsplit=2)
 
             # if c >= 2493:
             #     print("breakpoint")
             raw_value_temp = info[2].strip()[::-1].split('. ', maxsplit=1)
             if len(raw_value_temp) < 2:
-                raw_value_temp = raw_value_temp[0].split('.',maxsplit=1)
+                raw_value_temp = raw_value_temp[0].split('.', maxsplit=1)
             raw_value = raw_value_temp[1][::-1].strip()
             if raw_value.endswith(string_mark):
                 continue
@@ -74,15 +73,16 @@ def splitFile(input_file, output_file, entity_prefix, string_mark, split_char):
             raw_property = info[1]
 
             title_processed = raw_title.strip().split(entity_prefix)[1].split('>')[0].strip()
-            property_processed = raw_property[::-1].split('/',maxsplit=1)[0].split('>')[1][::-1]
+            property_processed = raw_property[::-1].split('/', maxsplit=1)[0].split('>')[1][::-1]
             temp = raw_value.split('"', maxsplit=2)
             if len(temp) == 1:
                 continue
             value_processed = temp[1]
             property_type = temp[2]
 
-            # output.write(title_processed+'\t'+property_processed+'\t'+value_processed+'\t'+property_type+'\n')
-            output.write(title_processed+'\t\t'+property_processed+'\t\t'+value_processed+'\n')
+            output.write(
+                title_processed + '\t\t' + property_processed + '\t\t' + value_processed + '\t\t' + property_type + '\n')
+            # output.write(title_processed+'\t\t'+property_processed+'\t\t'+value_processed+'\n')
 
     output.close()
 
@@ -92,5 +92,6 @@ if __name__ == '__main__':
     splitFile(input_file=path1, output_file=output1, entity_prefix='<http://dbpedia.org/resource/', string_mark='@en',
               split_char=' ')
     # zh
-    splitFile(input_file=path2, output_file=output2, entity_prefix='<http://zh.dbpedia.org/resource/', string_mark='@zh',
+    splitFile(input_file=path2, output_file=output2, entity_prefix='<http://zh.dbpedia.org/resource/',
+              string_mark='@zh',
               split_char=' ')
