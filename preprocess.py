@@ -80,9 +80,9 @@ def splitFile(input_file, output_file, entity_prefix, string_mark, split_char):
             value_processed = temp[1]
             property_type = temp[2]
 
-            output.write(
-                title_processed + '\t\t' + property_processed + '\t\t' + value_processed + '\t\t' + property_type + '\n')
-            # output.write(title_processed+'\t\t'+property_processed+'\t\t'+value_processed+'\n')
+            # output.write(
+            #     title_processed + '\t\t' + property_processed + '\t\t' + value_processed + '\t\t' + property_type + '\n')
+            output.write(title_processed+'\t\t'+property_processed+'\t\t'+value_processed+'\n')
 
     output.close()
 
