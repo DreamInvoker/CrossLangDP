@@ -14,9 +14,19 @@ base = "./sourceData/"
 path1 = base + "en_att_triples"
 path2 = base + "zh_att_triples"
 
+path_fr_en = base + "fr_en_att_triples"
+path_fr = base + "fr_att_triples"
+
+path_ja_en = base + "ja_en_att_triples"
+path_ja = base + "ja_att_triples"
+
 # 二、定义输出文件路径
 output1 = base + "en_att_triples_proccessed"
 output2 = base + "zh_att_triples_proccessed"
+output_fr_en = base + "fr_en_att_triples_proccessed"
+output_fr = base + "fr_att_triples_proccessed"
+output_ja_en = base + "ja_en_att_triples_proccessed"
+output_ja = base + "ja_att_triples_proccessed"
 
 # 三、处理源文件
 """
@@ -88,10 +98,30 @@ def splitFile(input_file, output_file, entity_prefix, string_mark, split_char):
 
 
 if __name__ == '__main__':
+    '''
+    
     # en
     splitFile(input_file=path1, output_file=output1, entity_prefix='<http://dbpedia.org/resource/', string_mark='@en',
               split_char=' ')
     # zh
     splitFile(input_file=path2, output_file=output2, entity_prefix='<http://zh.dbpedia.org/resource/',
               string_mark='@zh',
+              split_char=' ')
+
+    
+    # fr_en
+    splitFile(input_file=path_fr_en, output_file=output_fr_en, entity_prefix='<http://dbpedia.org/resource/', string_mark='@en',
+              split_char=' ')
+    # fr
+    splitFile(input_file=path_fr, output_file=output_fr, entity_prefix='<http://fr.dbpedia.org/resource/',
+              string_mark='@fr',
+              split_char=' ')
+    '''
+    # ja_en
+    splitFile(input_file=path_ja_en, output_file=output_ja_en, entity_prefix='<http://dbpedia.org/resource/',
+              string_mark='@en',
+              split_char=' ')
+    # ja
+    splitFile(input_file=path_ja, output_file=output_ja, entity_prefix='<http://ja.dbpedia.org/resource/',
+              string_mark='@ja',
               split_char=' ')

@@ -1,6 +1,4 @@
 import json
-import numpy as np
-import  math
 
 
 def getVectMapping(path):
@@ -11,12 +9,12 @@ def getVectMapping(path):
 
 def getPropertyNameList(path):
     with open(file=path, mode='r', encoding='utf-8') as f:
-         return json.load(f)
+        return json.load(f)
 
 
-def getTriples(path,vect_map_dict,output,split_char='\t\t'):
+def getTriples(path, vect_map_dict, output, split_char='\t\t'):
     triple_dict = {}
-    with open(file=path,mode='r',encoding='utf-8') as f:
+    with open(file=path, mode='r', encoding='utf-8') as f:
         lines = f.readlines()
         count = 0
         for line in lines:
@@ -60,11 +58,11 @@ def getTriples(path,vect_map_dict,output,split_char='\t\t'):
     #     json.dump(triple_dict,f)
 
 
-def generate(path,total,name_list, tri_dict1,tri_dict2, entity_prefix1,entity_prefix2,output,start_en=17136):
+def generate(path, total, name_list, tri_dict1, tri_dict2, entity_prefix1, entity_prefix2, output, start_en=17136):
     result = []
     filecount = 0
     name_list = list(name_list)
-    with open(file=path,mode='r',encoding='utf-8') as f:
+    with open(file=path, mode='r', encoding='utf-8') as f:
         lines = f.readlines()
         for line in lines:
             filecount += 1
@@ -88,23 +86,78 @@ def generate(path,total,name_list, tri_dict1,tri_dict2, entity_prefix1,entity_pr
                 continue
             entity_dict = select_dict[title]
 
-            for key,value in entity_dict.items():
+            for key, value in entity_dict.items():
                 if key not in name_list:
                     continue
                 else:
                     index = name_list.index(key)
-                    array[index] = float(sum(list(map(float,value)))/len(list(map(float,value))))
+                    array[index] = float(sum(list(map(float, value))) / len(list(map(float, value))))
 
             result.append(array)
 
-    with open(file=output,mode='w',encoding='utf-8') as f:
-        f.write(str(filecount-1))
+    with open(file=output, mode='w', encoding='utf-8') as f:
+        f.write(str(filecount - 1))
         for rs in result:
             ls = list(map(str, rs))
             line = " ".join(ls)
-            f.write('\n'+str(line))
+            f.write('\n' + str(line))
 
 
+def generate20180818(path, total, name_list, tri_dict1, tri_dict2, entity_prefix1, entity_prefix2, output,
+                     start_en=150002):
+    result = []
+    filecount = 0
+    name_list = list(name_list)
+    with open(file=path, mode='r', encoding='utf-8') as f:
+        lines = f.readlines()
+        for line in lines:
+            filecount += 1
+            if filecount == 1:
+                continue
+
+            if filecount == 15000:
+                pass
+            array = [0.0] * total
+            select_dict = {}
+            entity_prefix = ''
+            # if filecount < start_en:
+            #     select_dict = tri_dict1
+            #     entity_prefix = entity_prefix1
+            # else:
+            #     select_dict = tri_dict2
+            #     entity_prefix = entity_prefix2
+
+            print(filecount)
+            print(entity_prefix)
+            print(line)
+            if line.strip().split('\t')[1].startswith('http://zh.dbpedia.org/resource/') :
+                select_dict = tri_dict1
+                title = line.strip().split('http://zh.dbpedia.org/resource/')[1]
+            else:
+                select_dict = tri_dict2
+                title = line.strip().split('http://dbpedia.org/resource/')[1]
+
+
+            if title not in select_dict:
+                result.append(array)
+                continue
+            entity_dict = select_dict[title]
+
+            for key, value in entity_dict.items():
+                if key not in name_list:
+                    continue
+                else:
+                    index = name_list.index(key)
+                    array[index] = float(sum(list(map(float, value))) / len(list(map(float, value))))
+
+            result.append(array)
+
+    with open(file=output, mode='w', encoding='utf-8') as f:
+        f.write(str(filecount - 1))
+        for rs in result:
+            ls = list(map(str, rs))
+            line = " ".join(ls)
+            f.write('\n' + str(line))
 
 
 if __name__ == '__main__':
@@ -118,12 +171,13 @@ if __name__ == '__main__':
     count = len(property_name_list)
 
     # en
-    en_triple_dict = getTriples('./sourceData/en_att_triples_proccessed',en_vector_mapping,'./results/en_entityTripleDict.json')
+    en_triple_dict = getTriples('./sourceData/en_att_triples_proccessed', en_vector_mapping,
+                                './results/en_entityTripleDict.json')
 
     # zh
-    zh_triple_dict = getTriples('./sourceData/zh_att_triples_proccessed',zh_vector_mapping,'./results/zh_entityTripleDict.json')
+    zh_triple_dict = getTriples('./sourceData/zh_att_triples_proccessed', zh_vector_mapping,
+                                './results/zh_entityTripleDict.json')
 
-
-    generate('./sourceData/x_20180720.txt',count,property_name_list,zh_triple_dict,en_triple_dict,'http://zh.dbpedia.org/resource/','http://dbpedia.org/resource/','./results/x.txt')
-
-
+    # generate('./sourceData/x_20180720.txt',count,property_name_list,zh_triple_dict,en_triple_dict,'http://zh.dbpedia.org/resource/','http://dbpedia.org/resource/','./results/x_multiLang.txt')
+    generate20180818('./sourceData/x2.txt', count, property_name_list, zh_triple_dict, en_triple_dict,
+                     'http://zh.dbpedia.org/resource/', 'http://dbpedia.org/resource/', './results/x_multiLang.txt')
