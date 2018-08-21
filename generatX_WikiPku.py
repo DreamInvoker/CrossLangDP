@@ -121,10 +121,10 @@ def generate(path, total, name_list, tri_dict1, tri_dict2, output):
 
 if __name__ == '__main__':
     # wiki
-    wiki_vector_mapping = getVectMapping("./sourceData/wiki_json_normtogether_dict.json")
+    wiki_vector_mapping = getVectMapping("./sourceData/wiki_json_filtered_normtogether_dict_zh.json")
 
     # pku
-    pku_vector_mapping = getVectMapping("./sourceData/pku_json_normtogether_dict.json")
+    pku_vector_mapping = getVectMapping("./sourceData/pku_json_filtered_normtogether_dict_zh.json")
 
     property_name_list = getPropertyNameList('./sourceData/repeatedType.json')
 
