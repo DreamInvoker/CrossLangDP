@@ -1,6 +1,6 @@
 wiki_pred_list = []
 wiki_freq_list = []
-with open(file='./sourceData/wiki_pred_seq.txt', mode='r', encoding='utf-8') as f:
+with open(file='./sourceData/zh_pred_seq.txt', mode='r', encoding='utf-8') as f:
     lines = f.readlines()
     c = 0
     for line in lines:
@@ -15,7 +15,7 @@ with open(file='./sourceData/wiki_pred_seq.txt', mode='r', encoding='utf-8') as 
 
 pku_pred_list = []
 pku_freq_list = []
-with open(file='./sourceData/pku_pred_seq.txt', mode='r', encoding='utf-8') as f:
+with open(file='./sourceData/en_pred_seq.txt', mode='r', encoding='utf-8') as f:
     lines = f.readlines()
     c = 0
     for line in lines:
@@ -46,7 +46,7 @@ final = []
 for item in repeatedPred:
     wiki_freq = wiki_freq_list[wiki_pred_list.index(item)]
     pku_freq = pku_freq_list[pku_pred_list.index(item)]
-    if wiki_freq >= 5 and pku_freq >= 5:
+    if wiki_freq >= 100 and pku_freq >= 100:
         print(item,wiki_freq,pku_freq)
         final.append(item)
         count += 1
@@ -54,5 +54,5 @@ for item in repeatedPred:
 print(count)
 
 import json
-with open(file='./sourceData/repeatedType.json',mode='w',encoding='utf-8') as f:
+with open(file='./sourceData/repeatedType_100_zh_en.json',mode='w',encoding='utf-8') as f:
     json.dump(final,f)

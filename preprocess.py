@@ -98,7 +98,7 @@ def splitFile(input_file, output_file, entity_prefix, string_mark, split_char):
 
 
 if __name__ == '__main__':
-    '''
+
     
     # en
     splitFile(input_file=path1, output_file=output1, entity_prefix='<http://dbpedia.org/resource/', string_mark='@en',
@@ -108,7 +108,7 @@ if __name__ == '__main__':
               string_mark='@zh',
               split_char=' ')
 
-    
+    '''
     # fr_en
     splitFile(input_file=path_fr_en, output_file=output_fr_en, entity_prefix='<http://dbpedia.org/resource/', string_mark='@en',
               split_char=' ')
@@ -116,7 +116,7 @@ if __name__ == '__main__':
     splitFile(input_file=path_fr, output_file=output_fr, entity_prefix='<http://fr.dbpedia.org/resource/',
               string_mark='@fr',
               split_char=' ')
-    '''
+    
     # ja_en
     splitFile(input_file=path_ja_en, output_file=output_ja_en, entity_prefix='<http://dbpedia.org/resource/',
               string_mark='@en',
@@ -125,3 +125,4 @@ if __name__ == '__main__':
     splitFile(input_file=path_ja, output_file=output_ja, entity_prefix='<http://ja.dbpedia.org/resource/',
               string_mark='@ja',
               split_char=' ')
+    '''
