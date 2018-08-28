@@ -166,7 +166,7 @@ if __name__ == '__main__':
     # zh
     zh_vector_mapping = getVectMapping("./sourceData/zh_json_e7_normtogether_dict.json")
 
-    property_name_list = getPropertyNameList('./sourceData/repeatedType_10.json')
+    property_name_list = getPropertyNameList('./sourceData/repeatedType_100_zh_en.json')
 
     count = len(property_name_list)
 
