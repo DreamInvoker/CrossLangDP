@@ -130,9 +130,9 @@ def generate20180818(path, total, name_list, tri_dict1, tri_dict2, entity_prefix
             print(filecount)
             print(entity_prefix)
             print(line)
-            if line.strip().split('\t')[1].startswith('http://zh.dbpedia.org/resource/'):
+            if line.strip().split('\t')[1].startswith('http://fr.dbpedia.org/resource/'):
                 select_dict = tri_dict1
-                title = line.strip().split('http://zh.dbpedia.org/resource/')[1]
+                title = line.strip().split('http://fr.dbpedia.org/resource/')[1]
             else:
                 select_dict = tri_dict2
                 title = line.strip().split('http://dbpedia.org/resource/')[1]
@@ -161,11 +161,11 @@ def generate20180818(path, total, name_list, tri_dict1, tri_dict2, entity_prefix
 
 if __name__ == '__main__':
     # en
-    en_vector_mapping = getVectMapping("./sourceData/en_json_e7_normtogether_dict.json")
-    # zh
-    zh_vector_mapping = getVectMapping("./sourceData/zh_json_e7_normtogether_dict.json")
+    en_vector_mapping = getVectMapping("./sourceData/fr_en_json_normtogether_dict.json")
+    # fr
+    fr_vector_mapping = getVectMapping("./sourceData/fr_json_normtogether_dict.json")
 
-    property_name_list = getPropertyNameList('./sourceData/repeatedType_100_zh_en.json')
+    property_name_list = getPropertyNameList('./sourceData/repeatedType_fr.json')
 
     count = len(property_name_list)
 
@@ -173,9 +173,9 @@ if __name__ == '__main__':
     en_triple_dict = getTriples('./sourceData/en_att_triples_proccessed', en_vector_mapping,
                                 './results/en_entityTripleDict.json')
 
-    # zh
-    zh_triple_dict = getTriples('./sourceData/zh_att_triples_proccessed', zh_vector_mapping,
-                                './results/zh_entityTripleDict.json')
+    # fr
+    fr_triple_dict = getTriples('./sourceData/fr_att_triples_proccessed', fr_vector_mapping,
+                                './results/fr_entityTripleDict.json')
 
-    generate20180818('./sourceData/x2.txt', count, property_name_list, zh_triple_dict, en_triple_dict,
-                     'http://zh.dbpedia.org/resource/', 'http://dbpedia.org/resource/', './results/x_multiLang.txt')
+    generate20180818('./sourceData/x2_fr.txt', count, property_name_list, fr_triple_dict, en_triple_dict,
+                     'http://fr.dbpedia.org/resource/', 'http://dbpedia.org/resource/', './results/x_multiLang_fr.txt')

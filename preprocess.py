@@ -98,8 +98,7 @@ def splitFile(input_file, output_file, entity_prefix, string_mark, split_char):
 
 
 if __name__ == '__main__':
-
-    
+    '''
     # en
     splitFile(input_file=path1, output_file=output1, entity_prefix='<http://dbpedia.org/resource/', string_mark='@en',
               split_char=' ')
@@ -125,4 +124,3 @@ if __name__ == '__main__':
     splitFile(input_file=path_ja, output_file=output_ja, entity_prefix='<http://ja.dbpedia.org/resource/',
               string_mark='@ja',
               split_char=' ')
-    '''

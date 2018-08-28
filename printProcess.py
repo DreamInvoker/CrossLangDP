@@ -1,3 +1,5 @@
+import sendSMS as sms
+
 def show(c, total, interval="", DoneInfo='Done!'):
     """
         输出进度和百分比
@@ -13,4 +15,5 @@ def show(c, total, interval="", DoneInfo='Done!'):
     print('\r{}[{}%---{}/{}]\ttime:{}.'.format(s, per, c, total, interval), end='')
     if per == 100:
         print('\n{}'.format(DoneInfo))
+        sms.send(msg=DoneInfo,to='+8615321626680')
 
